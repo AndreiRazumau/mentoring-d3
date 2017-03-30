@@ -17,6 +17,11 @@
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
       <Rules>
+        <!--<Rule Name="ElementsMustBeDocumented">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">True</BooleanProperty>
+          </RuleSettings>
+        </Rule>-->
         <Rule Name="FileMustHaveHeader">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
@@ -58,7 +63,9 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+       <AnalyzerSettings>
+        <BooleanProperty Name="IgnorePrivates">True</BooleanProperty>
+      </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
       <Rules>
