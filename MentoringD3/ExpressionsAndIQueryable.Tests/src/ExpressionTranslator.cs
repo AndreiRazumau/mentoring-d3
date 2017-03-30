@@ -86,7 +86,8 @@ namespace ExpressionsAndIQueryable.Tests
                     }
 
                     break;
-
+                case ExpressionType.AndAlso:
+                    break;
                 default:
                     throw new NotSupportedException($"Operation {node.NodeType} is not supported");
             }

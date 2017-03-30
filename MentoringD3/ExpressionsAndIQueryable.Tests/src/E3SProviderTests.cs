@@ -66,5 +66,17 @@ namespace ExpressionsAndIQueryable.Tests
                 break;
             }
         }
+
+        [TestMethod]
+        public void WhereOperationWithAndAlsoOperator()
+        {
+            var employees = new E3SEntitySet<E3SEntity>();
+
+            foreach (var emp in employees.Where(e => e.Workstation.Contains("RUIZHW") && e.Workstation.StartsWith("EP") && e.Workstation.EndsWith("02")))
+            {
+                Assert.AreEqual(emp.Result, "Workstation:(*EP*RUIZHW*02*)");
+                break;
+            }
+        }
     }
 }
