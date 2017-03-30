@@ -37,6 +37,14 @@ namespace ExpressionsAndIQueryable.Tests
                 return node;
             }
 
+            if (node.Method.DeclaringType == typeof(string) && node.Method.Name == "Contains")
+            {
+                var value = node.Arguments[0];
+                this.Visit(value);
+
+                return node;
+            }
+
             return base.VisitMethodCall(node);
         }
 
