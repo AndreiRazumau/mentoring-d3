@@ -58,7 +58,7 @@
     <Compile Include="src\E3SLinqProvider.cs" />
     <Compile Include="src\E3SProviderTests.cs" />
     <Compile Include="src\E3SQuery.cs" />
-    <Compile Include="src\ExpressionToFTSRequestTranslator.cs" />
+    <Compile Include="src\ExpressiontTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

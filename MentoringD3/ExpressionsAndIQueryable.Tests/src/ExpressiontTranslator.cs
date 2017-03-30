@@ -5,17 +5,27 @@ using System.Text;
 
 namespace ExpressionsAndIQueryable.Tests
 {
-    public class ExpressionToFTSRequestTranslator : ExpressionVisitor
+    public class ExpressiontTranslator : ExpressionVisitor
     {
+        #region [Private members]
+
         private StringBuilder _resultString;
 
-        public string Translate(Expression exp)
+        #endregion
+
+        #region [Construction]
+
+        public string Translate(Expression expression)
         {
             this._resultString = new StringBuilder();
-            this.Visit(exp);
+            this.Visit(expression);
 
             return this._resultString.ToString();
         }
+
+        #endregion
+
+        #region [Override methods]
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
@@ -35,24 +45,22 @@ namespace ExpressionsAndIQueryable.Tests
             switch (node.NodeType)
             {
                 case ExpressionType.Equal:
-                    if (!(node.Left.NodeType == ExpressionType.MemberAccess))
                     {
-                        throw new NotSupportedException(string.Format("Left operand should be property or field", node.NodeType));
-                    }
+                        switch (node.Left.NodeType)
+                        {
+                            case ExpressionType.MemberAccess:
+                                this.BinaryNodeTraversal(node.Left, node.Right);
+                                break;
+                            case ExpressionType.Constant:
+                                this.BinaryNodeTraversal(node.Right, node.Left);
+                                break;
+                        }
 
-                    if (!(node.Right.NodeType == ExpressionType.Constant))
-                    {
-                        throw new NotSupportedException(string.Format("Right operand should be constant", node.NodeType));
+                        break;
                     }
-
-                    this.Visit(node.Left);
-                    this._resultString.Append("(");
-                    this.Visit(node.Right);
-                    this._resultString.Append(")");
-                    break;
 
                 default:
-                    throw new NotSupportedException(string.Format("Operation {0} is not supported", node.NodeType));
+                    throw new NotSupportedException($"Operation {node.NodeType} is not supported");
             }
 
             return node;
@@ -67,9 +75,21 @@ namespace ExpressionsAndIQueryable.Tests
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
-            this._resultString.Append(node.Value);
+            this._resultString.Append("(").Append(node.Value).Append(")");
 
-            return node;
+            return base.VisitConstant(node);
         }
+
+        #endregion
+
+        #region [Private methods]
+
+        private void BinaryNodeTraversal(Expression left, Expression right)
+        {
+            this.Visit(left);
+            this.Visit(right);
+        }
+
+        #endregion
     }
 }
