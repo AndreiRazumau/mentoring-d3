@@ -27,7 +27,7 @@ namespace ExpressionsAndIQueryable.Tests
 
         public TResult Execute<TResult>(Expression expression)
         {
-            var translator = new ExpressiontTranslator();
+            var translator = new ExpressionTranslator();
             var queryString = translator.Translate(expression);
             return (TResult)(IEnumerable)new E3SEntity[] { new E3SEntity() { Result = queryString } };
         }
