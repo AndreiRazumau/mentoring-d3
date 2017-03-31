@@ -14,7 +14,7 @@ namespace ExpressionsAndIQueryable.Tests
 
             foreach (var emp in employees.Where(e => "EPRUIZHW0249" == e.Workstation))
             {
-                Assert.AreEqual("Workstation:(EPRUIZHW0249)", emp.Result);
+                Assert.AreEqual(emp.Result, "Workstation:(EPRUIZHW0249)");
                 break;
             }
         }
@@ -26,7 +26,7 @@ namespace ExpressionsAndIQueryable.Tests
 
             foreach (var emp in employees.Where(e => e.Workstation == "EPRUIZHW0249"))
             {
-                Assert.AreEqual("Workstation:(EPRUIZHW0249)", emp.Result);
+                Assert.AreEqual(emp.Result, "Workstation:(EPRUIZHW0249)");
                 break;
             }
         }
@@ -38,7 +38,7 @@ namespace ExpressionsAndIQueryable.Tests
 
             foreach (var emp in employees.Where(e => e.Workstation.StartsWith("EPRUIZHW02")))
             {
-                Assert.AreEqual("Workstation:(EPRUIZHW02*)", emp.Result);
+                Assert.AreEqual(emp.Result, "Workstation:(EPRUIZHW02*)");
                 break;
             }
         }
@@ -50,7 +50,7 @@ namespace ExpressionsAndIQueryable.Tests
 
             foreach (var emp in employees.Where(e => e.Workstation.EndsWith("IZHW02")))
             {
-                Assert.AreEqual("Workstation:(*IZHW02)", emp.Result);
+                Assert.AreEqual(emp.Result, "Workstation:(*IZHW02)");
                 break;
             }
         }
@@ -62,19 +62,7 @@ namespace ExpressionsAndIQueryable.Tests
 
             foreach (var emp in employees.Where(e => e.Workstation.Contains("RUIZHW")))
             {
-                Assert.AreEqual("Workstation:(*RUIZHW*)", emp.Result);
-                break;
-            }
-        }
-
-        [TestMethod]
-        public void WhereOperationAndWhereOperationWithContains()
-        {
-            var employees = new EntitySet<UserEntity>();
-
-            foreach (var emp in employees.Where(e => e.Workstation.Contains("RUIZHW") && e.Workstation.Contains("XZ")))
-            {
-                Assert.AreEqual("(Workstation:(*XZ*))&&(Workstation:(*RUIZHW*))", emp.Result);
+                Assert.AreEqual(emp.Result, "Workstation:(*RUIZHW*)");
                 break;
             }
         }
