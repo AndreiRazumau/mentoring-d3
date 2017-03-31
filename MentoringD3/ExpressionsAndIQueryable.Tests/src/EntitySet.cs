@@ -1,4 +1,4 @@
-﻿using ExpressionsAndIQueryable.Tests.E3SClient;
+﻿using ExpressionsAndIQueryable.Tests.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +7,14 @@ using System.Linq.Expressions;
 
 namespace ExpressionsAndIQueryable.Tests
 {
-    public class E3SEntitySet<T> : IQueryable<T> where T : E3SEntity
+    public class EntitySet<T> : IQueryable<T> where T : UserEntity
     {
         #region [Construction]
 
-        public E3SEntitySet()
+        public EntitySet()
         {
             this.Expression = Expression.Constant(this);
-            this.Provider = new E3SLinqProvider();
+            this.Provider = new UserQueryProvider();
         }
 
         #endregion

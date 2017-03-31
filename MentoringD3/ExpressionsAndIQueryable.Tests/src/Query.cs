@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 
 namespace ExpressionsAndIQueryable.Tests
 {
-    public class E3SQuery<T> : IQueryable<T>
+    public class Query<T> : IQueryable<T>
     {
         #region [Construction]
 
-        public E3SQuery(Expression expression, E3SLinqProvider provider)
+        public Query(Expression expression, UserQueryProvider provider)
         {
             this.Expression = expression;
             this.Provider = provider;

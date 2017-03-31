@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExpressionsAndIQueryable.Tests
 {
-    public class ExpressionTranslator : ExpressionVisitor
+    public class UserExpressionVisitor : ExpressionVisitor
     {
         #region [Private members]
 
@@ -39,26 +39,17 @@ namespace ExpressionsAndIQueryable.Tests
 
             if (node.Method.DeclaringType == typeof(string))
             {
-                var value = node.Arguments[0];
                 switch (node.Method.Name)
                 {
                     case "Contains":
-                        this.Visit(node.Object);
-                        this.AddOpenBracket("*");
-                        this.Visit(value);
-                        this.AddCloseBracket("*");
+                        this.StringMethodTraversal(node, "*", "*");
                         break;
                     case "StartsWith":
-                        this.Visit(node.Object);
-                        this.AddOpenBracket();
-                        this.Visit(value);
-                        this.AddCloseBracket("*");
+                        this.StringMethodTraversal(node, null, "*");
                         break;
                     case "EndsWith":
-                        this.Visit(node.Object);
-                        this.AddOpenBracket("*");
-                        this.Visit(value);
-                        this.AddCloseBracket();
+                        this.StringMethodTraversal(node, "*", null);
+
                         break;
                     default:
                         throw new NotSupportedException($"Method {node.Method.Name} is not supported");
@@ -67,7 +58,7 @@ namespace ExpressionsAndIQueryable.Tests
                 return node;
             }
 
-            return base.VisitMethodCall(node);
+            throw new NotSupportedException($"Method of type {node.Method.DeclaringType} is not supported");
         }
 
         protected override Expression VisitBinary(BinaryExpression node)
@@ -85,40 +76,45 @@ namespace ExpressionsAndIQueryable.Tests
                             break;
                     }
 
-                    break;
-                case ExpressionType.AndAlso:
-                    break;
+                    return node;
                 default:
                     throw new NotSupportedException($"Operation {node.NodeType} is not supported");
             }
-
-            return node;
         }
 
         protected override Expression VisitMember(MemberExpression node)
         {
             this._resultString.Append(node.Member.Name).Append(":");
-
-            return base.VisitMember(node);
+            return node;
         }
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
             this._resultString.Append(node.Value);
-
-            return base.VisitConstant(node);
+            return node;
         }
 
         #endregion
 
         #region [Private methods]
 
-        private void BinaryNodeTraversal(Expression left, Expression right)
+        private void BinaryNodeTraversal(Expression left,
+                                         Expression right)
         {
             this.Visit(left);
             this.AddOpenBracket();
             this.Visit(right);
             this.AddCloseBracket();
+        }
+
+        private void StringMethodTraversal(MethodCallExpression expression,
+                                           string beforeValueCharacter,
+                                           string afterValueCharacter)
+        {
+            this.Visit(expression.Object);
+            this.AddOpenBracket(beforeValueCharacter);
+            this.Visit(expression.Arguments[0]);
+            this.AddCloseBracket(afterValueCharacter);
         }
 
         private void AddOpenBracket(string additionalCharacters = null)

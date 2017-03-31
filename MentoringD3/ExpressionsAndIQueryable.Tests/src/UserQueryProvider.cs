@@ -1,4 +1,4 @@
-﻿using ExpressionsAndIQueryable.Tests.E3SClient;
+﻿using ExpressionsAndIQueryable.Tests.Entities;
 using System;
 using System.Collections;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace ExpressionsAndIQueryable.Tests
 {
-    public class E3SLinqProvider : IQueryProvider
+    public class UserQueryProvider : IQueryProvider
     {
         #region [IQueryProvider]
 
@@ -17,7 +17,7 @@ namespace ExpressionsAndIQueryable.Tests
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return new E3SQuery<TElement>(expression, this);
+            return new Query<TElement>(expression, this);
         }
 
         public object Execute(Expression expression)
@@ -27,9 +27,9 @@ namespace ExpressionsAndIQueryable.Tests
 
         public TResult Execute<TResult>(Expression expression)
         {
-            var translator = new ExpressionTranslator();
+            var translator = new UserExpressionVisitor();
             var queryString = translator.Translate(expression);
-            return (TResult)(IEnumerable)new E3SEntity[] { new E3SEntity() { Result = queryString } };
+            return (TResult)(IEnumerable)new UserEntity[] { new UserEntity() { Result = queryString } };
         }
 
         #endregion

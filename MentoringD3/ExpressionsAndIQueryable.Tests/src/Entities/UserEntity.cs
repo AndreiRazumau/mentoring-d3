@@ -1,6 +1,6 @@
-﻿namespace ExpressionsAndIQueryable.Tests.E3SClient
+﻿namespace ExpressionsAndIQueryable.Tests.Entities
 {
-    public class E3SEntity
+    public class UserEntity
     {
         #region [Properties]
 
