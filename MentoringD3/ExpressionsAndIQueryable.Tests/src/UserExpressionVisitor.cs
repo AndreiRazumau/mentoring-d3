@@ -75,7 +75,9 @@ namespace ExpressionsAndIQueryable.Tests
                             this.BinaryNodeTraversal(node.Right, node.Left);
                             break;
                     }
-
+                    return node;
+                case ExpressionType.AndAlso:
+                    this.AndNodeTraversal(node.Right, node.Left);
                     return node;
                 default:
                     throw new NotSupportedException($"Operation {node.NodeType} is not supported");
@@ -98,6 +100,18 @@ namespace ExpressionsAndIQueryable.Tests
 
         #region [Private methods]
 
+        private void AndNodeTraversal(Expression left,
+                                      Expression right)
+        {
+            this.AddOpenBracket();
+            this.Visit(left);
+            this.AddCloseBracket();
+            this.AddAndAlsoOperator();
+            this.AddOpenBracket();
+            this.Visit(right);
+            this.AddCloseBracket();
+        }
+
         private void BinaryNodeTraversal(Expression left,
                                          Expression right)
         {
@@ -115,6 +129,11 @@ namespace ExpressionsAndIQueryable.Tests
             this.AddOpenBracket(beforeValueCharacter);
             this.Visit(expression.Arguments[0]);
             this.AddCloseBracket(afterValueCharacter);
+        }
+
+        private void AddAndAlsoOperator()
+        {
+            this._resultString.Append("&&");
         }
 
         private void AddOpenBracket(string additionalCharacters = null)
