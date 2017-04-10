@@ -35,7 +35,7 @@ namespace AdvancedXML.Tests.SchemaValidation
             settings.ValidationEventHandler +=
                 delegate (object sender, ValidationEventArgs e)
                 {
-                    this._result.Messages.Enqueue($"{e.Message} Wrong line: {e.Exception.LineNumber}");
+                    this._result.Messages.Enqueue($"{e.Message} Line Number: {e.Exception.LineNumber}, Line Position: {e.Exception.LinePosition}");
                     this._result.IsSuccess = false;
                 };
 

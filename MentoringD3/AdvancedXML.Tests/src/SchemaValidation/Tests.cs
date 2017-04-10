@@ -13,7 +13,7 @@ namespace AdvancedXML.Tests.SchemaValidation
         public void SuccesfulValidation()
         {
             var validator = new SchemaValidator();
-            var result = validator.Validate("../../Resources/xml/books.xml");
+            var result = validator.Validate("Resources/xml/books.xml");
             Assert.AreEqual(true, result.IsSuccess);
         }
 
@@ -21,7 +21,7 @@ namespace AdvancedXML.Tests.SchemaValidation
         public void FailedValidation()
         {
             var validator = new SchemaValidator();
-            var result = validator.Validate("../../Resources/xml/wrong-books.xml");
+            var result = validator.Validate("Resources/xml/wrong-books.xml");
             Assert.AreEqual(false, result.IsSuccess);
             foreach (var message in result.Messages)
             {
