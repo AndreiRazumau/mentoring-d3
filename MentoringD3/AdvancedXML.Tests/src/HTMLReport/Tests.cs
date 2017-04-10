@@ -2,7 +2,7 @@
 using System;
 using System.Xml.Xsl;
 
-namespace AdvancedXML.Tests.RssFeedGenerator
+namespace AdvancedXML.Tests.HTMLReport
 {
     /// <summary>
     ///     Summary description for Tests
@@ -11,11 +11,11 @@ namespace AdvancedXML.Tests.RssFeedGenerator
     public class Tests
     {
         [TestMethod]
-        public void GenerateRSS()
+        public void GenerateHTMLReport()
         {
             var xsl = new XslCompiledTransform();
             var settings = new XsltSettings { EnableScript = true };
-            xsl.Load("src/RssFeedGenerator/RssGenerator.xslt", settings, null);
+            xsl.Load("src/HTMLReport/HtmlGenerator.xslt", settings, null);
             xsl.Transform("../../Resources/xml/books.xml", null, Console.Out);
         }
     }
