@@ -8,7 +8,7 @@
   <msxsl:script implements-prefix='user' language='CSharp'>
     <![CDATA[
     public string formatDate(string date) {
-      return System.DateTime.ParseExact(date, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString();
+      return System.DateTime.ParseExact(date, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString("D");
     }]]>
   </msxsl:script>
 
@@ -28,11 +28,18 @@
   </xsl:template>
 
   <xsl:template match="/catalog/book/@id">
-    <xsl:if test="not(../genre = 'Computer') or (../genre = 'Computer' and not(../isbn))">
-      <xsl:element name="link">
-        <xsl:value-of select="concat('http://mylibrary/', .)" />
-      </xsl:element>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="../genre = 'Computer' and ../isbn">
+        <xsl:element name="link">
+          <xsl:value-of select="concat('http://my.safaribooksonline.com/', ../isbn)" />
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+          <xsl:element name="link">
+          <xsl:value-of select="concat('http://mylibrary/', .)" />
+        </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="/catalog/book/author">
@@ -57,14 +64,6 @@
     <xsl:element name="pubDate">
       <xsl:value-of select="user:formatDate(.)"/>
     </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/isbn">
-    <xsl:if test="../genre = 'Computer'">
-      <xsl:element name="link">
-        <xsl:value-of select="concat('http://my.safaribooksonline.com/', .)" />
-      </xsl:element>
-    </xsl:if>
   </xsl:template>
 
   <xsl:template match="text() | @*"/>
