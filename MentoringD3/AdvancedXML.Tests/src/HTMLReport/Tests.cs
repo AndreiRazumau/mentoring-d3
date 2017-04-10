@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using System.IO;
 using System.Xml.Xsl;
 
 namespace AdvancedXML.Tests.HTMLReport
@@ -16,7 +16,10 @@ namespace AdvancedXML.Tests.HTMLReport
             var xsl = new XslCompiledTransform();
             var settings = new XsltSettings { EnableScript = true };
             xsl.Load("src/HTMLReport/HtmlGenerator.xslt", settings, null);
-            xsl.Transform("../../Resources/xml/books.xml", null, Console.Out);
+            using (var stream = new FileStream("result.html", FileMode.OpenOrCreate))
+            {
+                xsl.Transform("../../Resources/xml/books.xml", null, stream);
+            }
         }
     }
 }

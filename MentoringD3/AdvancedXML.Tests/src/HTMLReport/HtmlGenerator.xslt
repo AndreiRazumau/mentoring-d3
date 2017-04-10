@@ -22,12 +22,12 @@
     <xsl:element name="html">
       <xsl:element name="head">
         <xsl:element name="title">
-          Текущие фонды по жанрам
+         Current fund of genres
         </xsl:element>
       </xsl:element>
       <xsl:element name="body">
         <xsl:element name="div">
-          Отчет за  <xsl:value-of select="user:getCurrentDate()"/>
+          Report for  <xsl:value-of select="user:getCurrentDate()"/>
         </xsl:element>
         <xsl:element name="div">
           <xsl:for-each select="/catalog/book/genre/text()[generate-id() = generate-id(key('genre',.)[1])]">
@@ -73,6 +73,10 @@
               </xsl:element>
             </xsl:element>
           </xsl:for-each>
+          <xsl:element name="div">
+             <xsl:attribute name="style">margin-top: 20px</xsl:attribute>
+            <xsl:value-of select="concat('Total count: ',count(//book))"/>
+          </xsl:element>
           <xsl:apply-templates select="node() | @*"/>
         </xsl:element>
       </xsl:element>
