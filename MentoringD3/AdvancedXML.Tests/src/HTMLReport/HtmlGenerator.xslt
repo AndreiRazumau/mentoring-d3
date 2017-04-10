@@ -3,7 +3,8 @@
                 xmlns:user="urn:my-scripts"
                 xmlns:msxsl="urn:schemas-microsoft-com:xslt">
 
-  <xsl:output method="xml" indent="yes"/>
+  <xsl:output method="html" indent="yes"/>
+  <xsl:key name="genre" match="/catalog/book/genre/text()" use="."/>
 
   <msxsl:script implements-prefix='user' language='CSharp'>
     <![CDATA[
@@ -17,57 +18,64 @@
     ]]>
   </msxsl:script>
 
-  <xsl:template match="/catalog">
-    <xsl:element name="rss">
-      <xsl:attribute name="version">2.0</xsl:attribute>
-      <xsl:element name="channel">
-        <xsl:apply-templates select="book"/>
+  <xsl:template match="/">
+    <xsl:element name="html">
+      <xsl:element name="head">
+        <xsl:element name="title">
+          Текущие фонды по жанрам
+        </xsl:element>
       </xsl:element>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book">
-    <xsl:element name="item">
-      <xsl:apply-templates select="node() | @*"/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/@id">
-    <xsl:choose>
-      <xsl:when test="../genre = 'Computer' and ../isbn">
-        <xsl:element name="link">
-          <xsl:value-of select="concat('http://my.safaribooksonline.com/', ../isbn)" />
+      <xsl:element name="body">
+        <xsl:element name="div">
+          Отчет за  <xsl:value-of select="user:getCurrentDate()"/>
         </xsl:element>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:element name="link">
-          <xsl:value-of select="concat('http://mylibrary/', .)" />
+        <xsl:element name="div">
+          <xsl:for-each select="/catalog/book/genre/text()[generate-id() = generate-id(key('genre',.)[1])]">
+            <xsl:variable name="genre" select="."/>
+            <xsl:element name="div">
+              <xsl:attribute name="style">margin-top: 20px</xsl:attribute>
+              <xsl:element name="table">
+                <xsl:attribute name="border">1</xsl:attribute>
+                <xsl:element name="caption">
+                  <xsl:attribute name="style">font-weight: bold</xsl:attribute>
+                  <xsl:value-of select="concat($genre,' (count:',count(//book[genre/text() = $genre]),')')"/>
+                </xsl:element>
+                <xsl:element name="tr">
+                  <xsl:element name="th">
+                    Author
+                  </xsl:element>
+                  <xsl:element name="th">
+                    Name
+                  </xsl:element>
+                  <xsl:element name="th">
+                    Publish Date
+                  </xsl:element>
+                  <xsl:element name="th">
+                    Registration Date
+                  </xsl:element>
+                </xsl:element>
+                <xsl:for-each select="//book[genre/text() = $genre]">
+                  <xsl:element name="tr">
+                    <xsl:element name="td">
+                      <xsl:value-of select="author/text()" />
+                    </xsl:element>
+                    <xsl:element name="td">
+                      <xsl:value-of select="title/text()" />
+                    </xsl:element>
+                    <xsl:element name="td">
+                      <xsl:value-of select="user:formatDate(publish_date/text())"/>
+                    </xsl:element>
+                    <xsl:element name="td">
+                      <xsl:value-of select="user:formatDate(registration_date/text())"/>
+                    </xsl:element>
+                  </xsl:element>
+                </xsl:for-each>
+              </xsl:element>
+            </xsl:element>
+          </xsl:for-each>
+          <xsl:apply-templates select="node() | @*"/>
         </xsl:element>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/author">
-    <xsl:element name="author">
-      <xsl:value-of select="."/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/title">
-    <xsl:element name="title">
-      <xsl:value-of select="."/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/description">
-    <xsl:element name="description">
-      <xsl:value-of select="."/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="/catalog/book/publish_date">
-    <xsl:element name="pubDate">
-      <xsl:value-of select="user:formatDate(.)"/>
+      </xsl:element>
     </xsl:element>
   </xsl:template>
 
