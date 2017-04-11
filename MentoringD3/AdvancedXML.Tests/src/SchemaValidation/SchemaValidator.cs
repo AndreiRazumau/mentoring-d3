@@ -42,8 +42,10 @@ namespace AdvancedXML.Tests.SchemaValidation
             settings.ValidationFlags = settings.ValidationFlags | XmlSchemaValidationFlags.ReportValidationWarnings;
             settings.ValidationType = ValidationType.Schema;
 
-            XmlReader reader = XmlReader.Create(filePath, settings);
-            while (reader.Read());
+            using (var reader = XmlReader.Create(filePath, settings))
+            {
+                while (reader.Read()) ;
+            }
 
             return this._result;
         }

@@ -19,8 +19,8 @@
         <xsl:element name="title"> Book news </xsl:element>
         <xsl:element name="description"> Take a look at some of favorite books. </xsl:element>
         <xsl:element name="link"> http://www.andreirazumau.com </xsl:element>
+        <xsl:apply-templates select="book"/>
       </xsl:element>
-      <xsl:apply-templates select="book"/>
     </xsl:element>
   </xsl:template>
 
