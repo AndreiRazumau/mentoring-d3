@@ -6,10 +6,16 @@
       <xs:minLength value="1" />
     </xs:restriction>
   </xs:simpleType>
-
-  <xs:simpleType name="publish-date">
+  
+  <xs:simpleType name="isbn">
     <xs:restriction base="xs:string">
-      <xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"></xs:pattern>
+      <xs:pattern value=".+"></xs:pattern> <!-- Here should be a valid pattern for ISBN (https://en.wikipedia.org/wiki/International_Standard_Book_Number)-->
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="date">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{4}-\d{2}-\d{2}"></xs:pattern>
     </xs:restriction>
   </xs:simpleType>
 
@@ -22,26 +28,17 @@
       <xs:enumeration value="Fantasy" />
     </xs:restriction>
   </xs:simpleType>
-
-  <xs:complexType name="template">
-    <xs:simpleContent>
-      <xs:extension base="required-text">
-        <xs:attribute name="LineNumber" type="xs:integer" use="optional" />
-        <xs:attribute name="LinePosition" type="xs:integer" use="optional" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
   
   <xs:complexType name="book">
     <xs:sequence>
-      <xs:element minOccurs="0" name="isbn" type="required-text" />
+      <xs:element minOccurs="0" name="isbn" type="isbn" />
       <xs:element name="author" type="required-text" />
       <xs:element name="title" type="required-text" />
       <xs:element name="genre" type="genre-type" />
       <xs:element name="publisher" type="required-text" />
-      <xs:element name="publish_date" type="publish-date" />
+      <xs:element name="publish_date" type="date" />
       <xs:element name="description" type="required-text" />
-      <xs:element name="registration_date" type="publish-date" />
+      <xs:element name="registration_date" type="date" />
     </xs:sequence>
     <xs:attribute name="id" use="required" >
       <xs:simpleType>

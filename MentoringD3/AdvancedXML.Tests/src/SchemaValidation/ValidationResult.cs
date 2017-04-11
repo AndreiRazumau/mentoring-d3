@@ -13,6 +13,10 @@ namespace AdvancedXML.Tests.SchemaValidation
             this.IsSuccess = true;
         }
 
+        /*
+            Why Queue?
+        */
+
         /// <summary>
         ///     Gets or sets the result messages
         /// </summary>

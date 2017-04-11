@@ -16,7 +16,8 @@ namespace AdvancedXML.Tests.HTMLReport
             var xsl = new XslCompiledTransform();
             var settings = new XsltSettings { EnableScript = true };
             xsl.Load("src/HTMLReport/HtmlGenerator.xslt", settings, null);
-            using (var stream = new FileStream("result.html", FileMode.OpenOrCreate))
+
+            using (var stream = new FileStream("../../Resources/xml/books.html", FileMode.OpenOrCreate))
             {
                 xsl.Transform("../../Resources/xml/books.xml", null, stream);
             }

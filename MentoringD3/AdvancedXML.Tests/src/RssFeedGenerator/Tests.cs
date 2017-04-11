@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 using System.Xml.Xsl;
 
 namespace AdvancedXML.Tests.RssFeedGenerator
@@ -16,7 +17,14 @@ namespace AdvancedXML.Tests.RssFeedGenerator
             var xsl = new XslCompiledTransform();
             var settings = new XsltSettings { EnableScript = true };
             xsl.Load("src/RssFeedGenerator/RssGenerator.xslt", settings, null);
-            xsl.Transform("../../Resources/xml/books.xml", null, Console.Out);
+
+            using (var fs = new FileStream("../../Resources/xml/books.rss", FileMode.CreateNew, FileAccess.Write))
+            {
+                /*
+                    Check the dates in output. They should be in correct format.
+                */ 
+                xsl.Transform("../../Resources/xml/books.xml", null, fs);
+            }
         }
     }
 }
