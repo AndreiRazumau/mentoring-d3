@@ -8,7 +8,7 @@
   <msxsl:script implements-prefix='user' language='CSharp'>
     <![CDATA[
     public string formatDate(string date) {
-      return System.DateTime.ParseExact(date, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString("D");
+      return System.DateTime.ParseExact(date, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString("R");
     }]]>
   </msxsl:script>
 
@@ -16,8 +16,11 @@
     <xsl:element name="rss">
       <xsl:attribute name="version">2.0</xsl:attribute>
       <xsl:element name="channel">
-        <xsl:apply-templates select="book"/>
+        <xsl:element name="title"> Book news </xsl:element>
+        <xsl:element name="description"> Take a look at some of favorite books. </xsl:element>
+        <xsl:element name="link"> http://www.andreirazumau.com </xsl:element>
       </xsl:element>
+      <xsl:apply-templates select="book"/>
     </xsl:element>
   </xsl:template>
 
@@ -35,7 +38,7 @@
         </xsl:element>
       </xsl:when>
       <xsl:otherwise>
-          <xsl:element name="link">
+        <xsl:element name="link">
           <xsl:value-of select="concat('http://mylibrary/', .)" />
         </xsl:element>
       </xsl:otherwise>
