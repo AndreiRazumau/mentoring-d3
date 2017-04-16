@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileManagementConsole.Flags;
+using System;
 using System.Runtime.InteropServices;
 
 namespace FileManagementConsole
@@ -25,14 +26,14 @@ namespace FileManagementConsole
                                              string destination,
                                              ProgressCallback callback,
                                              IntPtr data,
-                                             bool cancel = false,
-                                             int flags = 0);
+                                             bool cancel,
+                                             CopyFileFlags flags);
 
         [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall)]
         public extern static bool MoveFileWithProgress(string source,
                                                        string destination,
                                                        ProgressCallback callback,
                                                        IntPtr data,
-                                                       int flags = 0);
+                                                       MoveFileFlags flags);
     }
 }

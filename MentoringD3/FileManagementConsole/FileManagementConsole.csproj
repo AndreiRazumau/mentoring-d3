@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flags\CopyFileFlags.cs" />
+    <Compile Include="Flags\MoveFileFlags.cs" />
     <Compile Include="ProgressResultEnum.cs" />
     <Compile Include="FileManagementWrapper.cs" />
     <Compile Include="FileManagementInterop.cs" />

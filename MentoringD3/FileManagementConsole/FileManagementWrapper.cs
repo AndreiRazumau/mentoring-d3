@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileManagementConsole.Flags;
+using System;
 
 namespace FileManagementConsole
 {
@@ -8,12 +9,21 @@ namespace FileManagementConsole
 
         public static void CopyFile(string copyFrom, string copyTo)
         {
-            FileManagementInterop.CopyFileEx(copyFrom, copyTo, new FileManagementInterop.ProgressCallback(CopingPrrogressCallback), IntPtr.Zero);
+            FileManagementInterop.CopyFileEx(copyFrom,
+                                             copyTo,
+                                             new FileManagementInterop.ProgressCallback(CopingPrrogressCallback),
+                                             IntPtr.Zero,
+                                             false,
+                                             CopyFileFlags.COPY_FILE_RESTARTABLE);
         }
 
         public static void MoveFile(string fileName, string destinationPath)
         {
-            FileManagementInterop.MoveFileWithProgress(fileName, destinationPath, new FileManagementInterop.ProgressCallback(MovingProgressCallback), IntPtr.Zero);
+            FileManagementInterop.MoveFileWithProgress(fileName,
+                                                       destinationPath,
+                                                       new FileManagementInterop.ProgressCallback(MovingProgressCallback),
+                                                       IntPtr.Zero,
+                                                       MoveFileFlags.MOVE_FILE_REPLACE_EXISTSING | MoveFileFlags.MOVE_FILE_WRITE_THROUGH | MoveFileFlags.MOVE_FILE_COPY_ALLOWED);
         }
 
         #endregion
