@@ -1,5 +1,6 @@
 ﻿using FileManagementConsole.Flags;
 using System;
+using System.ComponentModel;
 
 namespace FileManagementConsole
 {
@@ -9,9 +10,9 @@ namespace FileManagementConsole
 
         public static void CopyFile(string copyFrom, string copyTo)
         {
-            FileManagementInterop.CopyFileEx(copyFrom,
+            var result = FileManagementInterop.CopyFileEx(copyFrom,
                                              copyTo,
-                                             new FileManagementInterop.ProgressCallback(CopingPrrogressCallback),
+                                             new FileManagementInterop.ProgressCallback(CopingProgressCallback),
                                              IntPtr.Zero,
                                              false,
                                              CopyFileFlags.COPY_FILE_RESTARTABLE);
@@ -19,18 +20,21 @@ namespace FileManagementConsole
 
         public static void MoveFile(string fileName, string destinationPath)
         {
-            FileManagementInterop.MoveFileWithProgress(fileName,
+            if (!FileManagementInterop.MoveFileWithProgress(fileName,
                                                        destinationPath,
                                                        new FileManagementInterop.ProgressCallback(MovingProgressCallback),
                                                        IntPtr.Zero,
-                                                       MoveFileFlags.MOVE_FILE_REPLACE_EXISTSING | MoveFileFlags.MOVE_FILE_WRITE_THROUGH | MoveFileFlags.MOVE_FILE_COPY_ALLOWED);
+                                                       MoveFileFlags.MOVE_FILE_REPLACE_EXISTSING | MoveFileFlags.MOVE_FILE_WRITE_THROUGH | MoveFileFlags.MOVE_FILE_COPY_ALLOWED))
+            {
+                throw new Win32Exception();
+            }
         }
 
         #endregion
 
         #region [Private methods]
 
-        private static ProgressResult CopingPrrogressCallback(long totalSize,
+        private static ProgressResult CopingProgressCallback(long totalSize,
                                                               long totalBytesTransferred,
                                                               long streamSize,
                                                               long streamBytesTransferred,
@@ -41,7 +45,7 @@ namespace FileManagementConsole
                                                               IntPtr lpData)
         {
             Console.WriteLine($"Copy in progress: {totalBytesTransferred * 100 / totalSize}% done.");
-            return ProgressResult.PROGRESS_CONTINUE;
+            return ProgressResult.PROGRESS_STOP;
         }
 
         private static ProgressResult MovingProgressCallback(long totalSize,

@@ -7,7 +7,7 @@ namespace FileManagementConsole
         static void Main(string[] args)
         {
             FileManagementWrapper.CopyFile("D:\\test.txt", "D:\\b.txt");
-            FileManagementWrapper.MoveFile("D:\\b.txt", "D:\\Sandbox\\b.txt");
+            FileManagementWrapper.MoveFile("D:\\b.txt", "C:\\Users\\Andrei_Razumau\\b.txt");
             Console.ReadLine();
         }
     }

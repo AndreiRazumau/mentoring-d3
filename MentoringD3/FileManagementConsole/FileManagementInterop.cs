@@ -29,7 +29,7 @@ namespace FileManagementConsole
                                              bool cancel,
                                              CopyFileFlags flags);
 
-        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         public extern static bool MoveFileWithProgress(string source,
                                                        string destination,
                                                        ProgressCallback callback,
