@@ -1,4 +1,4 @@
-﻿namespace FileManagementConsole
+﻿namespace FileManagementConsole.FileManagement
 {
     public enum ProgressResult : uint
     {

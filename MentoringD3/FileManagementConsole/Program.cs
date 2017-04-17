@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FileManagementConsole.FileManagement;
+using FileManagementConsole.Operation;
+using System;
 using System.Threading;
 
 namespace FileManagementConsole
@@ -6,8 +8,7 @@ namespace FileManagementConsole
     public class Program
     {
         private static ManualResetEvent _closeConsoleEvent = new ManualResetEvent(false);
-
-        private static UserActions _userActions;
+        private static FileOperation _operation;
 
         static void Main(string[] args)
         {
@@ -15,9 +16,8 @@ namespace FileManagementConsole
             userInputThread.IsBackground = true;
             userInputThread.Start();
 
-            var operation = new Operation(FileManagementMode.COPY, "D:\\test.txt", "D:\\b.txt");
-            operation.Start();
-
+            _operation = new FileOperation(FileManagementMode.COPY, "D:\\test.exe", "c:\\Users\\Andrei_Razumau\\b.txt");
+            _operation.Start();
             _closeConsoleEvent.WaitOne();
         }
 
@@ -35,13 +35,7 @@ namespace FileManagementConsole
                 switch (key.KeyChar)
                 {
                     case 'c':
-                        _userActions.AddUserAction(UserActionType.CANCEL);
-                        break;
-                    case 'p':
-                        _userActions.AddUserAction(UserActionType.PAUSE);
-                        break;
-                    case 'r':
-                        _userActions.AddUserAction(UserActionType.RESUME);
+                        _operation.Cancel();
                         break;
                     default:
                         break;
