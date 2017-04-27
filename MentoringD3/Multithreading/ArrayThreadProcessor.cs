@@ -21,22 +21,24 @@ namespace Multithreading
                 this._threads.Add(new Thread(MultiplyValue));
             }
 
-            var index = 0;
+            var startIndex = 0;
+            var processorIndex = 0;
             foreach (var thread in this._threads)
             {
-                if (index >= array.Count)
+                if (startIndex >= array.Count)
                 {
                     break;
                 }
-                var elCount = (int)Math.Ceiling((double)(array.Count - index) / Environment.ProcessorCount);
+                var elCount = (int)Math.Ceiling((double)(array.Count - startIndex) / (Environment.ProcessorCount - processorIndex));
                 var threadInfo = new ThreadInfo
                 {
-                    StartIndex = index,
-                    EndIndex = index + elCount - 1,
+                    StartIndex = startIndex,
+                    EndIndex = startIndex + elCount - 1,
                     SourceArray = array
                 };
                 thread.Start(threadInfo);
-                index += elCount;
+                startIndex += elCount;
+                processorIndex++;
             }
 
             foreach (var thread in this._threads)

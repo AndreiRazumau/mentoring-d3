@@ -17,7 +17,7 @@ namespace Multithreading
             var mechanism = int.Parse(Console.ReadLine());
 
             var sourceArray = new List<int>(arraySize);
-            var randomizer = new Random(6);
+            var randomizer = new Random();
 
             Console.WriteLine("\nSource array:");
             for (int i = 0; i < arraySize; i++)
@@ -30,12 +30,14 @@ namespace Multithreading
             switch (mechanism)
             {
                 case 1:
+                    Console.WriteLine("\nUse Threads:");
                     var threadProcessor = new ArrayThreadProcessor();
                     watch = Stopwatch.StartNew();
                     resultArray = threadProcessor.Process(sourceArray);
                     watch.Stop();
                     break;
                 case 2:
+                    Console.WriteLine("\nUse TPL:");
                     var parallelProcessor = new ArrayParallelProcessor();
                     watch = Stopwatch.StartNew();
                     resultArray = parallelProcessor.Process(sourceArray);
