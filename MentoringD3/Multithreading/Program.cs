@@ -9,7 +9,6 @@ namespace Multithreading
         static void Main(string[] args)
         {
             Stopwatch watch;
-            IList<int> resultArray;
 
             Console.Write("Please, insert the array size: ");
             var arraySize = int.Parse(Console.ReadLine());
@@ -22,35 +21,35 @@ namespace Multithreading
             Console.WriteLine("\nSource array:");
             for (int i = 0; i < arraySize; i++)
             {
-                var value = randomizer.Next(0, 100000);
+                var value = randomizer.Next(0, 10000000);
                 sourceArray.Add(value);
-                Console.Write($"{value} ");
             }
+
+            IProcessor processor;
 
             switch (mechanism)
             {
                 case 1:
                     Console.WriteLine("\nUse Threads:");
-                    var threadProcessor = new ArrayThreadProcessor();
-                    watch = Stopwatch.StartNew();
-                    resultArray = threadProcessor.Process(sourceArray);
-                    watch.Stop();
+                    processor = new ArrayThreadProcessor();
+
                     break;
                 case 2:
                     Console.WriteLine("\nUse TPL:");
-                    var parallelProcessor = new ArrayParallelProcessor();
-                    watch = Stopwatch.StartNew();
-                    resultArray = parallelProcessor.Process(sourceArray);
-                    watch.Stop();
+                    processor = new ArrayParallelProcessor();
                     break;
                 default:
                     return;
             }
 
-            Console.WriteLine("\n\nResult array:");
+            watch = Stopwatch.StartNew();
+            var resultArray = processor.Process(sourceArray);
+            watch.Stop();
+
+            Console.WriteLine("Result array:");
             foreach (var item in resultArray)
             {
-                Console.Write($"{item} ");
+                //Console.Write($"{item} ");
             }
 
             Console.WriteLine($"\nExecution time: {watch.ElapsedMilliseconds} ms");

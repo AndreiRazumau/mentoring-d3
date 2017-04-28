@@ -21,24 +21,48 @@ namespace Multithreading
                 this._threads.Add(new Thread(MultiplyValue));
             }
 
-            var startIndex = 0;
-            var processorIndex = 0;
-            foreach (var thread in this._threads)
+            if (array.Count < Environment.ProcessorCount)
             {
-                if (startIndex >= array.Count)
+                for (var i = 0; i < array.Count; ++i)
                 {
-                    break;
+                    var threadInfo = new ThreadInfo
+                    {
+                        StartIndex = i,
+                        EndIndex = i,
+                        SourceArray = array
+                    };
+                    this._threads[i].Start(threadInfo);
                 }
-                var elCount = (int)Math.Ceiling((double)(array.Count - startIndex) / (Environment.ProcessorCount - processorIndex));
-                var threadInfo = new ThreadInfo
+            }
+            else
+            {
+                var chunkSize = array.Count / this._threads.Count; // 33 chunk_size
+                var chunkCount = array.Count / chunkSize;  // 3 chunk_count
+                var reminder = array.Count % chunkSize; // 1 reminder;
+
+                var thread_info_list = new List<ThreadInfo>();
+                var threads = this._threads;
+
+                for (var i = 0; i < chunkCount - 1; ++i)
                 {
-                    StartIndex = startIndex,
-                    EndIndex = startIndex + elCount - 1,
+                    thread_info_list.Add(new ThreadInfo
+                    {
+                        StartIndex = i * chunkSize,
+                        EndIndex = i * chunkSize + chunkSize,
+                        SourceArray = array
+                    });
+                }
+                thread_info_list.Add(new ThreadInfo
+                {
+                    StartIndex = (chunkCount - 1) * chunkSize,
+                    EndIndex = (chunkCount - 1) * chunkSize + chunkSize + reminder,
                     SourceArray = array
-                };
-                thread.Start(threadInfo);
-                startIndex += elCount;
-                processorIndex++;
+                });
+
+                for (int i = 0; i < this._threads.Count; i++)
+                {
+                    this._threads[i].Start(thread_info_list[i]);
+                }
             }
 
             foreach (var thread in this._threads)
@@ -57,7 +81,7 @@ namespace Multithreading
         {
             var info = (ThreadInfo)value;
 
-            for (int i = info.StartIndex; i <= info.EndIndex; i++)
+            for (int i = info.StartIndex; i < info.EndIndex; i++)
             {
                 info.SourceArray[i] *= 2;
             }
