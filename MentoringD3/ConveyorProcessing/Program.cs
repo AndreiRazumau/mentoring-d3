@@ -76,7 +76,7 @@ namespace ConveyorProcessing
                     _processFileFileEvent.Set();
                     break;
                 }
-                if (_rowsToProcessCollection.TryTake(out string fileRow))
+                if (_rowsToProcessCollection.TryTake(out string fileRow, 1))
                 {
                     char groupName;
                     for (int i = 0; i < fileRow.Length;)
@@ -123,7 +123,7 @@ namespace ConveyorProcessing
                 {
                     break;
                 }
-                if (_structuresToWriteCollection.TryTake(out GroupInfo group))
+                if (_structuresToWriteCollection.TryTake(out GroupInfo group, 1))
                 {
                     using (var file = File.AppendText($@"..\Debug\Resources\{group.GroupName}-Group.txt"))
                     {
