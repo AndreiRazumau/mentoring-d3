@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionsAndIQueryable.Tests", "ExpressionsAndIQueryable.Tests\ExpressionsAndIQueryable.Tests.csproj", "{3D490FC7-F956-4E16-9A32-2B8E73F946C3}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagementConsole", "FileManagementConsole\FileManagementConsole.csproj", "{AE6461A3-0CAE-4367-A1B1-09FD58D41630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multithreading", "Multithreading\Multithreading.csproj", "{4D2620CC-FA53-4415-8303-19BBADDB4908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConveyorProcessing", "ConveyorProcessing\ConveyorProcessing.csproj", "{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,18 @@ Global
 		{4D2620CC-FA53-4415-8303-19BBADDB4908}.Release|x64.Build.0 = Release|Any CPU
 		{4D2620CC-FA53-4415-8303-19BBADDB4908}.Release|x86.ActiveCfg = Release|Any CPU
 		{4D2620CC-FA53-4415-8303-19BBADDB4908}.Release|x86.Build.0 = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|x64.Build.0 = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Debug|x86.Build.0 = Debug|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x64.ActiveCfg = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x64.Build.0 = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x86.ActiveCfg = Release|Any CPU
+		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
