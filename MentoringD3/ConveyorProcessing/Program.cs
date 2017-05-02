@@ -13,10 +13,13 @@ namespace ConveyorProcessing
 
             public int GroupNumber { get; set; }
 
-            public GroupInfo(char name, int number)
+            public bool IsTerminal { get; set; }
+
+            public GroupInfo(char name, int number, bool isTerminal = false)
             {
                 this.GroupName = name;
                 this.GroupNumber = number;
+                this.IsTerminal = isTerminal;
             }
         }
 
@@ -43,6 +46,8 @@ namespace ConveyorProcessing
                 processFileRowThread.Start();
                 writeGroupsThread.Start();
                 writeGroupsThread.Join();
+                processFileRowThread.Join();
+                readFileThread.Join();
             }
             catch (Exception ex)
             {
@@ -63,72 +68,62 @@ namespace ConveyorProcessing
                     _rowsToProcessCollection.Add(row);
                 }
             }
-
-            _readFileEvent.Set();
+            _rowsToProcessCollection.Add(null);
         }
 
         public static void ProcessFileRow()
         {
-            for (;;)
+            string readValue;
+            while ((readValue = _rowsToProcessCollection.Take()) != null)
             {
-                if (_readFileEvent.WaitOne(0) && _rowsToProcessCollection.Count == 0)
-                {
-                    _processFileFileEvent.Set();
+                if (readValue == null)
                     break;
-                }
-                if (_rowsToProcessCollection.TryTake(out string fileRow, 1))
+                char groupName;
+                for (int i = 0; i < readValue.Length;)
                 {
-                    char groupName;
-                    for (int i = 0; i < fileRow.Length;)
+                    if (readValue[i] >= 'A' && readValue[i] <= 'z')
                     {
-                        if (fileRow[i] >= 'A' && fileRow[i] <= 'z')
+                        int numberLength = 0;
+                        groupName = readValue[i];
+                        for (int j = i + 1; j < readValue.Length; j++)
                         {
-                            int numberLength = 0;
-                            groupName = fileRow[i];
-                            for (int j = i + 1; j < fileRow.Length; j++)
+                            if (readValue[j] >= '0' && readValue[j] <= '9')
                             {
-                                if (fileRow[j] >= '0' && fileRow[j] <= '9')
-                                {
-                                    numberLength++;
-                                }
-                                else
-                                {
-                                    if (numberLength == 0)
-                                    {
-                                        throw new InvalidDataException("Invalid file content.");
-                                    }
-
-                                    break;
-                                }
+                                numberLength++;
                             }
-                            var groupNumber = fileRow.Substring(i + 1, numberLength);
-                            _structuresToWriteCollection.Add(new GroupInfo(groupName, int.Parse(groupNumber)));
-                            i = numberLength + i + 1;
+                            else
+                            {
+                                if (numberLength == 0)
+                                {
+                                    throw new InvalidDataException("Invalid file content.");
+                                }
+
+                                break;
+                            }
                         }
-                        else
-                        {
-                            throw new InvalidDataException("Invalid file content.");
-                        }
+                        var groupNumber = readValue.Substring(i + 1, numberLength);
+                        _structuresToWriteCollection.Add(new GroupInfo(groupName, int.Parse(groupNumber)));
+                        i = numberLength + i + 1;
+                    }
+                    else
+                    {
+                        throw new InvalidDataException("Invalid file content.");
                     }
                 }
             }
+
+            _structuresToWriteCollection.Add(new GroupInfo(default(char), 0, true));
         }
 
         public static void WriteGroups()
         {
             var line = 1;
-            for (;;)
+            GroupInfo group;
+            while (!(group = _structuresToWriteCollection.Take()).IsTerminal)
             {
-                if (_processFileFileEvent.WaitOne(0) && _structuresToWriteCollection.Count == 0)
+                using (var file = File.AppendText($@"..\Debug\Resources\{group.GroupName}-Group.txt"))
                 {
-                    break;
-                }
-                if (_structuresToWriteCollection.TryTake(out GroupInfo group, 1))
-                {
-                    using (var file = File.AppendText($@"..\Debug\Resources\{group.GroupName}-Group.txt"))
-                    {
-                        file.WriteLine($"Line: {line}; Number: {group.GroupNumber};");
-                    }
+                    file.WriteLine($"Line: {line}; Number: {group.GroupNumber};");
                 }
             }
         }
