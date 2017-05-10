@@ -52,7 +52,7 @@ namespace CombineLogService
                                     {
                                         if (i == 5)
                                         {
-                                            throw new IOException("File in use.");
+                                            throw new IOException($"File {fileInfo.Name} is in use.");
                                         }
                                     }
                                     Thread.Sleep(1000);
