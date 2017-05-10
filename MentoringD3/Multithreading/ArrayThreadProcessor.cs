@@ -18,7 +18,7 @@ namespace Multithreading
             for (int i = 0; i < Environment.ProcessorCount; i++)
             {
 
-                this._threads.Add(new Thread(MultiplyValue));
+                this._threads.Add(new Thread(this.MultiplyValue));
             }
 
             if (array.Count < Environment.ProcessorCount)

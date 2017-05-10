@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multithreading", "Multithre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConveyorProcessing", "ConveyorProcessing\ConveyorProcessing.csproj", "{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombineLogService", "CombineLogService\CombineLogService.csproj", "{F28DB6D9-626D-4B29-9A57-255064D94C11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,18 @@ Global
 		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x64.Build.0 = Release|Any CPU
 		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x86.ActiveCfg = Release|Any CPU
 		{1613C124-E0BE-4609-ACCA-7C013BEA7BE9}.Release|x86.Build.0 = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|x64.Build.0 = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Debug|x86.Build.0 = Debug|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|x64.ActiveCfg = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|x64.Build.0 = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|x86.ActiveCfg = Release|Any CPU
+		{F28DB6D9-626D-4B29-9A57-255064D94C11}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
