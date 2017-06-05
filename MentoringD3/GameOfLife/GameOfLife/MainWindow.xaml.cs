@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -7,40 +9,36 @@ namespace GameOfLife
     public partial class MainWindow : Window
     {
         private Grid mainGrid;
-        DispatcherTimer timer;   //  Generation timer
+        DispatcherTimer timer;
         private int genCounter;
         private AdWindow[] adWindow;
-
+        private static List<long> timing = new List<long>();
 
         public MainWindow()
         {
             InitializeComponent();
-            mainGrid = new Grid(MainCanvas);
+            this.mainGrid = new Grid(this.MainCanvas);
 
-            timer = new DispatcherTimer();
-            timer.Tick += OnTimer;
-            timer.Interval = TimeSpan.FromMilliseconds(200);
+            this.timer = new DispatcherTimer();
+            this.timer.Tick += this.OnTimer;
+            this.timer.Interval = TimeSpan.FromMilliseconds(10);
         }
-
 
         private void StartAd()
         {
-            
             {
-                adWindow = new AdWindow[2];
+                this.adWindow = new AdWindow[2];
                 for (int i = 0; i < 2; i++)
                 {
-                    if (adWindow[i] == null)
+                    if (this.adWindow[i] == null)
                     {
-                        adWindow[i] = new AdWindow(this);
-                        adWindow[i].Closed += AdWindowOnClosed;
-                        adWindow[i].Top = this.Top + (330 * i) + 70;
-                        adWindow[i].Left = this.Left + 240;                        
-                        adWindow[i].Show();
+                        this.adWindow[i] = new AdWindow(this);
+                        this.adWindow[i].Closed += this.AdWindowOnClosed;
+                        this.adWindow[i].Top = this.Top + (330 * i) + 70;
+                        this.adWindow[i].Left = this.Left + 240;
+                        this.adWindow[i].Show();
                     }
                 }
-                
-                
             }
         }
 
@@ -48,41 +46,41 @@ namespace GameOfLife
         {
             for (int i = 0; i < 2; i++)
             {
-                adWindow[i].Closed -= AdWindowOnClosed;
-                adWindow[i] = null;
+                this.adWindow[i].Closed -= this.AdWindowOnClosed;
+                this.adWindow[i] = null;
             }
-            
-            
         }
-
 
         private void Button_OnClick(object sender, EventArgs e)
         {
-            if (!timer.IsEnabled)
+            if (!this.timer.IsEnabled)
             {
-                timer.Start();
-                ButtonStart.Content = "Stop";
+                this.timer.Start();
+                this.ButtonStart.Content = "Stop";
                 StartAd();
             }
             else
             {
-                timer.Stop();
-                ButtonStart.Content = "Start";
+                this.timer.Stop();
+                this.ButtonStart.Content = "Start";
             }
         }
 
         private void OnTimer(object sender, EventArgs e)
         {
-            mainGrid.Update();
-            genCounter++;
-            lblGenCount.Content = "Generations: " + genCounter;
+            var a = new Stopwatch();
+            a.Start();
+            this.mainGrid.Update();
+
+            a.Stop();
+            timing.Add(a.ElapsedMilliseconds);
+            this.genCounter++;
+            this.lblGenCount.Content = "Generations: " + this.genCounter;
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            mainGrid.Clear();
+            this.mainGrid.Clear();
         }
-
-        
     }
 }
