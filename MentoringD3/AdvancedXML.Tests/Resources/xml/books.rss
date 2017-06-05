@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title> Book news </title>
+    <description> Take a look at some of favorite books. </description>
+    <link> http://www.andreirazumau.com </link>
+    <item>
+      <link>http://my.safaribooksonline.com/0-596-00103-7</link>
+      <author>Löwy, Juval</author>
+      <title>COM and .NET Component Services</title>
+      <pubDate>Sat, 01 Sep 2001 00:00:00 GMT</pubDate>
+      <description>
+      COM &amp; .NET Component Services provides both traditional COM programmers and new .NET
+      component developers with the information they need to begin developing applications that take full advantage of COM+ services.
+      This book focuses on COM+ services, including support for transactions, queued components, events, concurrency management, and security
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk102</link>
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <pubDate>Sat, 16 Dec 2000 00:00:00 GMT</pubDate>
+      <description>
+      A former architect battles corporate zombies,
+      an evil sorceress, and her own childhood to become queen
+      of the world.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk103</link>
+      <author>Corets, Eva</author>
+      <title>Maeve Ascendant</title>
+      <pubDate>Fri, 17 Nov 2000 00:00:00 GMT</pubDate>
+      <description>
+      After the collapse of a nanotechnology
+      society in England, the young survivors lay the
+      foundation for a new society.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk104</link>
+      <author>Corets, Eva</author>
+      <title>Oberon's Legacy</title>
+      <pubDate>Sat, 10 Mar 2001 00:00:00 GMT</pubDate>
+      <description>
+      In post-apocalypse England, the mysterious
+      agent known only as Oberon helps to create a new life
+      for the inhabitants of London. Sequel to Maeve
+      Ascendant.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk105</link>
+      <author>Corets, Eva</author>
+      <title>The Sundered Grail</title>
+      <pubDate>Mon, 10 Sep 2001 00:00:00 GMT</pubDate>
+      <description>
+      The two daughters of Maeve, half-sisters,
+      battle one another for control of England. Sequel to
+      Oberon's Legacy.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk106</link>
+      <author>Randall, Cynthia</author>
+      <title>Lover Birds</title>
+      <pubDate>Sat, 02 Sep 2000 00:00:00 GMT</pubDate>
+      <description>
+      When Carla meets Paul at an ornithology
+      conference, tempers fly as feathers get ruffled.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk107</link>
+      <author>Thurman, Paula</author>
+      <title>Splish Splash</title>
+      <pubDate>Thu, 02 Nov 2000 00:00:00 GMT</pubDate>
+      <description>
+      A deep sea diver finds true love twenty
+      thousand leagues beneath the sea.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk108</link>
+      <author>Knorr, Stefan</author>
+      <title>Creepy Crawlies</title>
+      <pubDate>Wed, 06 Dec 2000 00:00:00 GMT</pubDate>
+      <description>
+      An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk109</link>
+      <author>Kress, Peter</author>
+      <title>Paradox Lost</title>
+      <pubDate>Thu, 02 Nov 2000 00:00:00 GMT</pubDate>
+      <description>
+      After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems
+      of being quantum.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk110</link>
+      <author>O'Brien, Tim</author>
+      <title>Microsoft .NET: The Programming Bible</title>
+      <pubDate>Sat, 09 Dec 2000 00:00:00 GMT</pubDate>
+      <description>
+      Microsoft's .NET initiative is explored in
+      detail in this deep programmer's reference.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk111</link>
+      <author>O'Brien, Tim</author>
+      <title>MSXML3: A Comprehensive Guide</title>
+      <pubDate>Fri, 01 Dec 2000 00:00:00 GMT</pubDate>
+      <description>
+      The Microsoft MSXML3 parser is covered in
+      detail, with attention to XML DOM interfaces, XSLT processing,
+      SAX and more.
+    </description>
+    </item>
+    <item>
+      <link>http://mylibrary/bk112</link>
+      <author>Galos, Mike</author>
+      <title>Visual Studio 7: A Comprehensive Guide</title>
+      <pubDate>Mon, 16 Apr 2001 00:00:00 GMT</pubDate>
+      <description>
+      Microsoft Visual Studio 7 is explored in depth,
+      looking at how Visual Basic, Visual C++, C#, and ASP+ are
+      integrated into a comprehensive development
+      environment.
+    </description>
+    </item>
+  </channel>
+</rss>
