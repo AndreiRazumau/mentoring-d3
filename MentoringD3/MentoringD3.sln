@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombineLogService", "Combin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameOfLife", "GameOfLife\GameOfLife\GameOfLife.csproj", "{BDFD7BAE-9744-44C4-8259-B3757F24B245}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOP", "AOP\AOP.csproj", "{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,18 @@ Global
 		{BDFD7BAE-9744-44C4-8259-B3757F24B245}.Release|x64.Build.0 = Release|Any CPU
 		{BDFD7BAE-9744-44C4-8259-B3757F24B245}.Release|x86.ActiveCfg = Release|Any CPU
 		{BDFD7BAE-9744-44C4-8259-B3757F24B245}.Release|x86.Build.0 = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|x64.Build.0 = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Debug|x86.Build.0 = Debug|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|x64.ActiveCfg = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|x64.Build.0 = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|x86.ActiveCfg = Release|Any CPU
+		{0AB6E3B2-F099-43BD-8E2F-BB38586E403D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
